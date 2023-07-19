@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndToEndTests", "EndToEndTests\EndToEndTests.csproj", "{953DD693-CFE7-4255-867E-0A0E305B2FF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld.Blazor", "HelloWorld.Blazor\HelloWorld.Blazor.csproj", "{D242C155-896D-44AE-A613-D5124C8670E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{953DD693-CFE7-4255-867E-0A0E305B2FF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{953DD693-CFE7-4255-867E-0A0E305B2FF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{953DD693-CFE7-4255-867E-0A0E305B2FF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{953DD693-CFE7-4255-867E-0A0E305B2FF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D242C155-896D-44AE-A613-D5124C8670E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D242C155-896D-44AE-A613-D5124C8670E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D242C155-896D-44AE-A613-D5124C8670E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D242C155-896D-44AE-A613-D5124C8670E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
