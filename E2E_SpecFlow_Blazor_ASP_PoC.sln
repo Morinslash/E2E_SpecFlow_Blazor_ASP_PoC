@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndToEndTests", "EndToEndTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld.Blazor", "HelloWorld.Blazor\HelloWorld.Blazor.csproj", "{D242C155-896D-44AE-A613-D5124C8670E4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld.API", "HelloWorld.API\HelloWorld.API.csproj", "{D01A25DC-30CC-4D37-92A5-AEF9C7AB9A32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{D242C155-896D-44AE-A613-D5124C8670E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D242C155-896D-44AE-A613-D5124C8670E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D242C155-896D-44AE-A613-D5124C8670E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D01A25DC-30CC-4D37-92A5-AEF9C7AB9A32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D01A25DC-30CC-4D37-92A5-AEF9C7AB9A32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D01A25DC-30CC-4D37-92A5-AEF9C7AB9A32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D01A25DC-30CC-4D37-92A5-AEF9C7AB9A32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
