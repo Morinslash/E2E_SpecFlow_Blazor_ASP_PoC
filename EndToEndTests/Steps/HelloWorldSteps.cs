@@ -1,21 +1,24 @@
 ﻿using Bunit;
-using FluentAssertions;
+using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace EndToEndTests.Steps;
 
 [Binding]
-public class HelloWorldSteps : IDisposable
+public class HelloWorldSteps : IClassFixture<WebApplicationFactory<HelloWorld.API.Program>>, IDisposable
 {
     private readonly TestContext _testContext;
     private IRenderedComponent<HelloWorld.Blazor.Pages.Index>? _component;
+    private readonly WebApplicationFactory<HelloWorld.API.Program> _factory;
 
-    public HelloWorldSteps()
+    public HelloWorldSteps(WebApplicationFactory<HelloWorld.API.Program> factory)
     {
-        var httpClient = new HttpClient();
+        _factory = factory;
+        var client = _factory.CreateClient();
+
         _testContext = new TestContext();
-        _testContext.Services.AddScoped(_ => httpClient);
+        _testContext.Services.AddScoped(_ => client);
     }
     [Given(@"I have navigated to the Blazor page")]
     public void GivenIHaveNavigatedToTheBlazorPage()
@@ -33,5 +36,6 @@ public class HelloWorldSteps : IDisposable
     public void Dispose()
     {
         _testContext.Dispose();
+        _factory.Dispose();
     }
 }

@@ -12,6 +12,7 @@
 
     <ItemGroup>
         <PackageReference Include="bunit" Version="1.21.9" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.20" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
         <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.9.57" />
         <PackageReference Include="SpecFlow.xUnit" Version="3.9.22" />
@@ -24,6 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\HelloWorld.API\HelloWorld.API.csproj" />
       <ProjectReference Include="..\HelloWorld.Blazor\HelloWorld.Blazor.csproj" />
     </ItemGroup>
 
