@@ -1,3 +1,5 @@
+using HelloWorld.API.Repositories;
+
 namespace HelloWorld.API;
 
 public class Program
@@ -6,6 +8,7 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        builder.Services.AddScoped<IDatabaseRepository, InMemoryHelloRepository>();
 // Add services to the container.
 
         builder.Services.AddControllers();

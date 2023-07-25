@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HelloWorld.API.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HelloWorld.API.Controllers;
 
@@ -6,9 +7,17 @@ namespace HelloWorld.API.Controllers;
 [Route("[controller]")]
 public class HelloWorldController : ControllerBase
 {
+    private readonly IDatabaseRepository _helloRepo;
+
+    public HelloWorldController(IDatabaseRepository helloRepo)
+    {
+        _helloRepo = helloRepo;
+    }
+
     [HttpGet]
     public ActionResult<string> Get()
     {
-        return Ok("Hello World");
+        var hello = _helloRepo.GetHello();
+        return Ok(hello);
     }
 }
