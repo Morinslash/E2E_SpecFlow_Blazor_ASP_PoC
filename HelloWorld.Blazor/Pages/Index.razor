@@ -1,4 +1,4 @@
-﻿@inject HttpClient HttpClient
+﻿@inject IBackendApiClient BackendClient
 @page "/"
 
 <PageTitle>Index</PageTitle>
@@ -11,6 +11,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        ApiResponse = await HttpClient.GetStringAsync("https://localhost:7020/helloworld");
+        ApiResponse = await BackendClient.GetHello();
     }
 }

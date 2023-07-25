@@ -1,4 +1,5 @@
 ﻿using Bunit;
+using HelloWorld.Blazor.Services;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -16,9 +17,11 @@ public class HelloWorldSteps : IClassFixture<WebApplicationFactory<HelloWorld.AP
     {
         _factory = factory;
         var client = _factory.CreateClient();
-
+        var testHttpClientFactory = new TestHttpClientFactory(client);
+        IBackendApiClient backendService = new BackendApiClient(testHttpClientFactory);
+        
         _testContext = new TestContext();
-        _testContext.Services.AddScoped(_ => client);
+        _testContext.Services.AddScoped(_ => backendService);
     }
     [Given(@"I have navigated to the Blazor page")]
     public void GivenIHaveNavigatedToTheBlazorPage()
