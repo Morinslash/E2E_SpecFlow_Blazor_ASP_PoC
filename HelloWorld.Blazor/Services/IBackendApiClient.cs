@@ -11,7 +11,7 @@ public class BackendApiClient : IBackendApiClient
 
     public BackendApiClient(IHttpClientFactory clientFactory)
     {
-        _client = clientFactory.CreateClient();
+        _client = clientFactory.CreateClient("helloClient");
     }
 
     public Task<string> GetHello()

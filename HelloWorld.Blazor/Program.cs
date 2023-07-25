@@ -5,6 +5,11 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
+builder.Services.AddHttpClient("helloClient", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7020");
+});
+
 builder.Services.AddScoped<IBackendApiClient, BackendApiClient>();
 
 builder.RootComponents.Add<App>("#app");
