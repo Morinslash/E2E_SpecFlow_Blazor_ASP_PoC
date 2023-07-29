@@ -5,14 +5,12 @@ namespace HelloWorld.API.Repositories;
 public class MongoRepository : IDatabaseRepository
 {
     private readonly IMongoCollection<HelloMessage> _collection;
-    private const string ConnectionString = "mongodb://localhost:27017";
-    private const string DatabaseName = "HelloDatabase";
-    private const string CollectionName = "HelloMessages";
-    public MongoRepository()
+    public MongoRepository(IMongoClient client, IConfiguration configuration)
     {
-        var client = new MongoClient(ConnectionString);
-        var database = client.GetDatabase(DatabaseName);
-        _collection = database.GetCollection<HelloMessage>(CollectionName);
+        var databaseName = configuration.GetValue<string>("MongoSettings:DatabaseName");
+        var collectionName = configuration.GetValue<string>("MongoSettings:CollectionName");
+        var database = client.GetDatabase(databaseName);
+        _collection = database.GetCollection<HelloMessage>(collectionName);
     }
     public string GetHello()
     {
