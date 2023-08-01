@@ -1,35 +1,26 @@
 ﻿using Bunit;
-using DotNet.Testcontainers.Builders;
-using DotNet.Testcontainers.Containers;
 using HelloWorld.API.DbSeeders;
 using HelloWorld.Blazor.Services;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MongoDB.Driver;
 using Xunit;
 
 namespace EndToEndTests.Steps;
 
 [Binding]
-public class HelloWorldSteps : IClassFixture<WebApplicationFactory<HelloWorld.API.Program>>, IDisposable
+public class HelloWorldSteps : IClassFixture<HelloWorldApiFactory>, IDisposable
 {
     private readonly TestContext _testContext;
     private IRenderedComponent<HelloWorld.Blazor.Pages.Index>? _component;
-    private readonly WebApplicationFactory<HelloWorld.API.Program> _factory;
+    private readonly HelloWorldApiFactory _factory;
+    private readonly MongoSeeder _seeder;
 
-    readonly IContainer _mongoContainer = new ContainerBuilder()
-        .WithImage("mongo:latest")
-        .WithPortBinding(27017, 27017)
-        .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(27017))
-        .Build();
-
-    public HelloWorldSteps(WebApplicationFactory<HelloWorld.API.Program> factory)
+    public HelloWorldSteps(HelloWorldApiFactory factory)
     {
         _factory = factory;
-
         
-
+        using var scope = _factory.Services.CreateScope();
+        _seeder = scope.ServiceProvider.GetRequiredService<MongoSeeder>();
+        
         var client = _factory.CreateClient();
         var testHttpClientFactory = new TestHttpClientFactory(client);
         IBackendApiClient backendService = new BackendApiClient(testHttpClientFactory);
@@ -39,23 +30,15 @@ public class HelloWorldSteps : IClassFixture<WebApplicationFactory<HelloWorld.AP
     }
 
     [BeforeScenario()]
-    public void StartTestContainer()
+    public async Task SeedDatabase()
     {
-        _mongoContainer.StartAsync().Wait();
-        using (var scope = _factory.Services.CreateScope())
-        {
-            var scopedServices = scope.ServiceProvider;
-            var mongoClient = scopedServices.GetRequiredService<IMongoClient>();
-            var configuration = scopedServices.GetRequiredService<IConfiguration>();
-            var seeder = new MongoSeeder(mongoClient, configuration);
-            seeder.SeedAsync().Wait();
-        }
+        await _seeder.SeedAsync();
     }
 
     [AfterScenario()]
-    public void StopTestContainer()
+    public async Task DropDatabase()
     {
-        _mongoContainer.StopAsync().Wait();
+        await _seeder.DropDatabaseAsync();
     }
 
     [Given(@"I have navigated to the Blazor page")]
